@@ -1,0 +1,179 @@
+.container {
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .main {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .headerControls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f0f0f0;
+    border-radius: 8px;
+  }
+  
+  .accountSelector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .accountSelector label {
+    font-weight: bold;
+  }
+  
+  .accountSelector select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 350px;
+  }
+  
+  .toggleButton {
+    padding: 8px 16px;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .errorMessage {
+    color: #d32f2f;
+    background: #fdecea;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .creatorView, .userView {
+    padding: 20px;
+  }
+  
+  .section {
+    margin-bottom: 25px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .actionButton, .subscribeButton, .accessButton {
+    padding: 10px 20px;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .actionButton:hover, .subscribeButton:hover, .accessButton:hover {
+    background: #3a5a8f;
+  }
+  
+  .actionButton:disabled, .subscribeButton:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .subscriptionBox, .accessBox {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .creatorInfo {
+    background: #e8f4fd;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  .subscriptionForm {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .availableContent {
+    margin-top: 20px;
+  }
+  
+  .contentList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+  }
+  
+  .contentItem {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  
+  .selectButton {
+    padding: 5px 10px;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .selectButton:hover {
+    background: #3a5a8f;
+  }
+
+  .currentContent {
+    background: #f0f8ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border: 1px solid #d0e0ff;
+  }
+  
+  .currentContent h3 {
+    margin-top: 0;
+    color: #2a5885;
+  }
+  
+  .currentContent p {
+    margin: 5px 0;
+  }
