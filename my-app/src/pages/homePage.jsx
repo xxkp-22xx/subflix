@@ -113,7 +113,7 @@ const HomePage = () => {
         {currentContent && (
           <div className={styles.currentContent}>
             <h3>Current Content</h3>
-            <p>IPFS Hash: {currentContent.ipfsHash}</p>
+            <p style={{fontSize:"20px"}}>IPFS Hash: {currentContent.ipfsHash}</p>
             <p>Creator: {currentContent.creator}</p>
           </div>
         )}
@@ -144,10 +144,10 @@ const HomePage = () => {
 
             <div className={styles.section}>
               <h2>Registered Content</h2>
-              <div className={styles.contentList}>
+              <div className={styles.contentList}  style={{width:"67vw"}}>
                 {registeredContents.map((content, index) => (
                   <div key={index} className={styles.contentItem}>
-                    <p>IPFS Hash: {content.ipfsHash}</p>
+                    <p  style={{fontSize:"20px"}}>IPFS Hash: {content.ipfsHash}</p>
                     <p>Creator: {content.creator}</p>
                   </div>
                 ))}
@@ -197,8 +197,9 @@ const HomePage = () => {
               <div className={styles.contentList}>
                 {registeredContents.map((content, index) => (
                   <div key={index} className={styles.contentItem}>
-                    <p>IPFS Hash: {content.ipfsHash}</p>
-                    <p>Creator: {content.creator}</p>
+                    <p style={{ wordBreak: "break-word", fontSize: "20px" }}>IPFS Hash: {content.ipfsHash}</p>
+                    <p style={{ wordBreak: "break-word" }}>Creator: {content.creator}</p>
+
                     <button
                       onClick={() =>
                         setSubscriptionData((prev) => ({
