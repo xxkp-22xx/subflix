@@ -1,6 +1,6 @@
 const CONFIG = {
     LOCAL: {
-      address: "0xYourGanacheContractAddressHere",
+      address: "0x8257C80494eF01eF749967dCB4ef044513c605fE",
       networkId: "1337", // Ganache network ID
     },
     SEPOLIA: {
