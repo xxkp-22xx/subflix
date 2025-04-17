@@ -16,6 +16,7 @@ function App() {
     <Router>
       <NavBar userAddress={userAddress} userRole={userRole} />
       <Routes>
+      <Route path="/" element={<LoginPage setUserAddress={setUserAddress} setUserRole={setUserRole}/>} />
         <Route path="/creator" element={<CreatorPage />} />
         <Route path="/login" element={<LoginPage setUserAddress={setUserAddress} setUserRole={setUserRole} />} />
         <Route path="/user" element={<UserPage />} />

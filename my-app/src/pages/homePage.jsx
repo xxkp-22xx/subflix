@@ -215,7 +215,7 @@ export default function HomePage() {
         {currentContent && (
           <div className={styles.currentContent}>
             <h3>Current Content</h3>
-            <p>IPFS Hash: {currentContent.ipfsHash}</p>
+            <p style={{fontSize:"20px"}}>IPFS Hash: {currentContent.ipfsHash}</p>
             <p>Creator: {currentContent.creator}</p>
           </div>
         )}
@@ -245,10 +245,10 @@ export default function HomePage() {
             
             <div className={styles.section}>
               <h2>Registered Content</h2>
-              <div className={styles.contentList}>
+              <div className={styles.contentList}  style={{width:"67vw"}}>
                 {registeredContents.map((content, index) => (
                   <div key={index} className={styles.contentItem}>
-                    <p>IPFS Hash: {content.ipfsHash}</p>
+                    <p  style={{fontSize:"20px"}}>IPFS Hash: {content.ipfsHash}</p>
                     <p>Creator: {content.creator}</p>
                   </div>
                 ))}
@@ -305,6 +305,7 @@ export default function HomePage() {
                         ...subscriptionData,
                         ipfsHash: content.ipfsHash
                       })}
+
                       className={styles.selectButton}
                     >
                       Select
