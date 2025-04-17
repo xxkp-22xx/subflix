@@ -2,10 +2,9 @@
 pragma solidity ^0.8.1;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract SubManager is ERC721Enumerable, Ownable {
+contract SubManager is ERC721Enumerable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
@@ -28,6 +27,8 @@ contract SubManager is ERC721Enumerable, Ownable {
     uint256 private constant CREATORS_SHARE = 90;
     uint256 private constant PLATFORM_SHARE = 10;
 
+    address public admin;
+
     mapping(uint256 => Subscription) private _subscriptions;
     mapping(uint256 => Content) private _registeredContents;
     mapping(string => uint256) private _ipfsToTokenId;
@@ -47,16 +48,24 @@ contract SubManager is ERC721Enumerable, Ownable {
     );
 
     event ContentApproved(uint256 indexed tokenId);
-
     event ContentDeleted(uint256 indexed tokenId);
+    event FundsWithdrawn(address indexed recipient, uint256 amount, bool isPlatform);
+    event AdminChanged(address indexed previousAdmin, address indexed newAdmin);
 
-    event FundsWithdrawn(
-        address indexed recipient,
-        uint256 amount,
-        bool isPlatform
-    );
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Not the admin");
+        _;
+    }
 
-    constructor() ERC721("ContentSubscription", "CSUB") {}
+    constructor() ERC721("ContentSubscription", "CSUB") {
+        admin = msg.sender;
+    }
+
+    function changeAdmin(address newAdmin) external onlyAdmin {
+        require(newAdmin != address(0), "Invalid address");
+        emit AdminChanged(admin, newAdmin);
+        admin = newAdmin;
+    }
 
     function registerContent(string memory name, string memory ipfsHash, address creator) external {
         require(msg.sender == creator, "You must be the creator");
@@ -77,13 +86,13 @@ contract SubManager is ERC721Enumerable, Ownable {
         emit ContentRegistered(contentTokenId, name, ipfsHash, creator);
     }
 
-    function approveContent(uint256 contentTokenId) external onlyOwner {
+    function approveContent(uint256 contentTokenId) external onlyAdmin {
         require(contentExists(contentTokenId), "Content not found");
         _registeredContents[contentTokenId].approved = true;
         emit ContentApproved(contentTokenId);
     }
 
-    function deleteContent(uint256 contentTokenId) external onlyOwner {
+    function deleteContent(uint256 contentTokenId) external onlyAdmin {
         require(contentExists(contentTokenId), "Content not found");
         string memory ipfsHash = _registeredContents[contentTokenId].ipfsHash;
         delete _registeredContents[contentTokenId];
@@ -166,17 +175,17 @@ contract SubManager is ERC721Enumerable, Ownable {
         emit FundsWithdrawn(content.creator, amount, false);
     }
 
-    function withdrawPlatformFunds() external onlyOwner {
+    function withdrawPlatformFunds() external onlyAdmin {
         uint256 amount = platformPool;
         platformPool = 0;
 
-        (bool sent, ) = owner().call{value: amount}("");
+        (bool sent, ) = admin.call{value: amount}("");
         require(sent, "Failed to send Ether");
 
-        emit FundsWithdrawn(owner(), amount, true);
+        emit FundsWithdrawn(admin, amount, true);
     }
 
-    function setSubscriptionPrice(uint256 newPrice) external onlyOwner {
+    function setSubscriptionPrice(uint256 newPrice) external onlyAdmin {
         subscriptionPrice = newPrice;
     }
 
