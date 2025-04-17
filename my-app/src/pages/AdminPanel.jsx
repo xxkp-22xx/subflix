@@ -7,7 +7,7 @@ const IPFS_GATEWAY = "https://gateway.pinata.cloud/ipfs/";
 
 const AdminPanel = () => {
   const [account, setAccount] = useState('');
-  const [isOwner, setIsOwner] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [creatorPool, setCreatorPool] = useState('0');
   const [platformPool, setPlatformPool] = useState('0');
   const [newPrice, setNewPrice] = useState('');
@@ -26,8 +26,9 @@ const AdminPanel = () => {
       const user = accounts[0];
       setAccount(user);
 
-      const owner = await contract.methods.owner().call();
-      setIsOwner(user.toLowerCase() === owner.toLowerCase());
+      // ✅ Use custom admin() function instead of owner()
+      const admin = await contract.methods.admin().call();
+      setIsAdmin(user.toLowerCase() === admin.toLowerCase());
 
       const creator = await contract.methods.creatorsPool().call();
       const platform = await contract.methods.platformPool().call();
@@ -95,8 +96,8 @@ const AdminPanel = () => {
       <button onClick={() => navigate('/')} style={{ marginBottom: '1rem' }}>🔙 Back</button>
       <h2>🛠️ Admin Dashboard</h2>
 
-      {!isOwner ? (
-        <p>🔒 You are not the contract owner.</p>
+      {!isAdmin ? (
+        <p>🔒 You are not the contract admin.</p>
       ) : (
         <div style={{ maxWidth: '600px' }}>
           <p><b>Connected:</b> {account}</p>
